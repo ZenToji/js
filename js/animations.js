@@ -1,10 +1,3 @@
-// ============================================
-// animations.js — Оживление Nike Air Mag лендинга
-// ============================================
-
-// ============================================
-// 1. PRELOADER — экран загрузки
-// ============================================
 function initPreloader() {
   const preloader = document.createElement('div');
   preloader.className = 'preloader';
@@ -17,9 +10,6 @@ function initPreloader() {
   }, 1000);
 }
 
-// ============================================
-// 2. SMOOTH SCROLL — плавный скролл к секциям
-// ============================================
 function initSmoothScroll() {
   document.addEventListener('click', (e) => {
     const link = e.target.closest('a[href^="#"]');
@@ -36,9 +26,7 @@ function initSmoothScroll() {
   });
 }
 
-// ============================================
-// 3. SCROLL REVEAL — появление элементов при скролле
-// ============================================
+
 function initScrollReveal() {
   const elements = document.querySelectorAll('[data-reveal]');
   if (elements.length === 0) return;
@@ -62,9 +50,7 @@ function initScrollReveal() {
   elements.forEach((el) => observer.observe(el));
 }
 
-// ============================================
-// 4. HEADER SCROLL BEHAVIOR — умный хедер
-// ============================================
+
 function initHeaderBehavior() {
   const header = document.querySelector('.header');
   if (!header) return;
@@ -75,7 +61,6 @@ function initHeaderBehavior() {
   const updateHeader = () => {
     const scrollY = window.scrollY;
 
-    // Не скрываем хедер при открытом бургер-меню
     const menuOpen = document.querySelector('.header__menu--open');
     if (menuOpen) {
       header.classList.remove('header--hidden');
@@ -84,11 +69,10 @@ function initHeaderBehavior() {
       return;
     }
 
-    // Скрываем при скролле вниз (порог 100px)
     if (scrollY > 100 && scrollY > lastScrollY) {
       header.classList.add('header--hidden');
     }
-    // Показываем при скролле вверх
+
     else if (scrollY < lastScrollY) {
       header.classList.remove('header--hidden');
     }
@@ -105,11 +89,9 @@ function initHeaderBehavior() {
   });
 }
 
-// ============================================
-// 5. PARALLAX HERO — параллакс-эффект на hero
-// ============================================
+
 function initParallax() {
-  // Только для десктопа
+
   if (window.innerWidth <= 768) return;
 
   const heroImg = document.querySelector('.hero__img');
@@ -124,7 +106,6 @@ function initParallax() {
         const heroSection = document.querySelector('.hero');
         const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
 
-        // Параллакс работает только пока hero видна
         if (scrollY < heroBottom) {
           const offset = scrollY * 0.3;
           heroImg.style.transform = `translateX(-50%) translateY(${offset}px)`;
@@ -136,9 +117,6 @@ function initParallax() {
   });
 }
 
-// ============================================
-// 6. SCROLL-TO-TOP — кнопка "наверх"
-// ============================================
 function initScrollToTop() {
   const btn = document.createElement('button');
   btn.className = 'scroll-top';
@@ -168,9 +146,6 @@ function initScrollToTop() {
   });
 }
 
-// ============================================
-// 7. FORM VALIDATION — валидация формы заказа
-// ============================================
 function initFormValidation() {
   const form = document.querySelector('.modal-buy__form');
   if (!form) return;
@@ -193,7 +168,7 @@ function initFormValidation() {
     },
   };
 
-  // Убираем ошибку при вводе
+
   Object.values(fields).forEach((field) => {
     field.el.addEventListener('input', () => {
       clearFieldError(field.el);
@@ -214,7 +189,7 @@ function initFormValidation() {
     });
 
     if (isValid) {
-      // Показываем сообщение об успехе
+
       const content = form.closest('.modal-buy__content');
       const successMsg = document.createElement('div');
       successMsg.className = 'modal-buy__success';
@@ -230,12 +205,12 @@ function initFormValidation() {
       form.style.display = 'none';
       content.appendChild(successMsg);
 
-      // Автозакрытие через 2s
+
       setTimeout(() => {
         const closeBtn = document.querySelector('[data-modal-close]');
         if (closeBtn) closeBtn.click();
 
-        // Сброс формы через 500ms после закрытия
+
         setTimeout(() => {
           form.reset();
           form.style.display = '';
@@ -260,15 +235,12 @@ function initFormValidation() {
   }
 }
 
-// ============================================
-// 8. CART COUNTER — счётчик корзины
-// ============================================
+
 function initCartCounter() {
   const cartButton = document.querySelector('.product__cart-button');
   const headerActions = document.querySelector('.header__actions');
   if (!cartButton || !headerActions) return;
 
-  // Создаём бейдж на иконке корзины в хедере
   const cartHeaderBtn = headerActions.querySelectorAll('.header__actions-button')[1]; // вторая кнопка = корзина
   if (!cartHeaderBtn) return;
 
@@ -286,16 +258,12 @@ function initCartCounter() {
     badge.textContent = count;
     badge.style.display = 'flex';
 
-    // Анимация пульсации
     badge.classList.remove('cart-badge--pulse');
-    void badge.offsetWidth; // reflow для перезапуска анимации
+    void badge.offsetWidth; 
     badge.classList.add('cart-badge--pulse');
   });
 }
 
-// ============================================
-// 9. BUTTON RIPPLE — эффект ripple на кнопках
-// ============================================
 function initRipple() {
   const buttons = document.querySelectorAll(
     '.product__sizes-button, .product__buy-button, .product__cart-button, .modal-buy__submit'
@@ -325,9 +293,6 @@ function initRipple() {
   });
 }
 
-// ============================================
-// 10. STATS COUNTER — анимация счётчиков (заготовка)
-// ============================================
 function animateCounter(element, target, duration = 2000) {
   let start = null;
   const initial = 0;
@@ -365,9 +330,6 @@ function initStatsCounter() {
   counters.forEach((el) => observer.observe(el));
 }
 
-// ============================================
-// ГЛАВНАЯ ФУНКЦИЯ — экспорт для index.js
-// ============================================
 export function initAnimations() {
   try {
     initPreloader();
