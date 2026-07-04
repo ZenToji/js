@@ -287,19 +287,14 @@ input:focus {
 }
 
 /* ================================
-   BURGER OVERLAY
+   MAIN DIMMED (burger menu open)
    ================================ */
-.burger-overlay {
+.main--dimmed::after {
+  content: '';
   position: fixed;
   inset: 0;
-  z-index: var(--layer-1);
   background-color: rgba(0, 0, 0, 0.5);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity var(--transition-time), visibility var(--transition-time);
-}
-
-.burger-overlay--visible {
-  opacity: 1;
-  visibility: visible;
+  z-index: var(--layer-1);
+  pointer-events: none;
+  transition: opacity var(--transition-time);
 }
