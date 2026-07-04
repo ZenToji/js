@@ -35,7 +35,7 @@ function initScrollReveal() {
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          // Задержка для каскадного эффекта у карточек
+
           const delay = entry.target.dataset.revealDelay || 0;
           setTimeout(() => {
             entry.target.classList.add('reveal--visible');
