@@ -11,10 +11,10 @@ export default class BurgerMenu {
 			throw new Error('Required DOM elements are missing.');
 		}
 
-		// Создаём overlay для затемнения
+		// Создаём overlay для затемнения (перед main, чтобы меню было сверху)
 		this.overlay = document.createElement('div');
 		this.overlay.className = 'burger-overlay';
-		this.body.appendChild(this.overlay);
+		this.body.insertBefore(this.overlay, this.main);
 		this.onOverlayClick = this.onOverlayClick.bind(this);
 
 		this.isMobileView = window.innerWidth <= this.config.BREAKPOINT;
