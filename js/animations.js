@@ -11,56 +11,10 @@ function initPreloader() {
   preloader.innerHTML = '<div class="preloader__spinner"></div>';
   document.body.prepend(preloader);
 
-  let minDelayDone = false;
-  let imagesLoaded = false;
-
-  const hidePreloader = () => {
-    if (minDelayDone && imagesLoaded) {
-      preloader.classList.add('preloader--hidden');
-      setTimeout(() => preloader.remove(), 500);
-    }
-  };
-
-  // Минимальная задержка 1.5s для плавности
   setTimeout(() => {
-    minDelayDone = true;
-    hidePreloader();
-  }, 1500);
-
-  // Ждём загрузки всех изображений
-  const images = document.querySelectorAll('img');
-  let loadedCount = 0;
-  const totalImages = images.length;
-
-  if (totalImages === 0) {
-    imagesLoaded = true;
-    hidePreloader();
-  } else {
-    images.forEach((img) => {
-      if (img.complete) {
-        loadedCount++;
-        if (loadedCount >= totalImages) {
-          imagesLoaded = true;
-          hidePreloader();
-        }
-      } else {
-        img.addEventListener('load', () => {
-          loadedCount++;
-          if (loadedCount >= totalImages) {
-            imagesLoaded = true;
-            hidePreloader();
-          }
-        });
-        img.addEventListener('error', () => {
-          loadedCount++;
-          if (loadedCount >= totalImages) {
-            imagesLoaded = true;
-            hidePreloader();
-          }
-        });
-      }
-    });
-  }
+    preloader.classList.add('preloader--hidden');
+    setTimeout(() => preloader.remove(), 500);
+  }, 1000);
 }
 
 // ============================================

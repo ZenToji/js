@@ -11,6 +11,12 @@ export default class BurgerMenu {
 			throw new Error('Required DOM elements are missing.');
 		}
 
+		// Создаём overlay для затемнения
+		this.overlay = document.createElement('div');
+		this.overlay.className = 'burger-overlay';
+		this.body.appendChild(this.overlay);
+		this.onOverlayClick = this.onOverlayClick.bind(this);
+
 		this.isMobileView = window.innerWidth <= this.config.BREAKPOINT;
 
 		this.onBurgerClick = this.onBurgerClick.bind(this);
@@ -37,6 +43,7 @@ export default class BurgerMenu {
 		// Click events
 		this.burgerButton.addEventListener('click', this.onBurgerClick);
 		this.body.addEventListener('click', this.onBodyClick);
+		this.overlay.addEventListener('click', this.onOverlayClick);
 
 		// Touch events
 		this.body.addEventListener('touchstart', this.handleTouchStart);
@@ -48,6 +55,7 @@ export default class BurgerMenu {
 		// Click events
 		this.burgerButton.removeEventListener('click', this.onBurgerClick);
 		this.body.removeEventListener('click', this.onBodyClick);
+		this.overlay.removeEventListener('click', this.onOverlayClick);
 
 		// Touch events
 		this.body.removeEventListener('touchstart', this.handleTouchStart);
@@ -73,6 +81,7 @@ export default class BurgerMenu {
 		this.burgerButton.ariaExpanded = isOpen;
 		this.burgerMenu.classList.toggle(this.config.HEADER_MENU_OPEN, isOpen);
 		this.body.classList.toggle(this.config.PAGE_BODY_NO_SCROLL, isOpen);
+		this.overlay.classList.toggle('burger-overlay--visible', isOpen);
 
 		if (this.main) {
 			this.main.style.pointerEvents = isOpen ? 'none' : '';
@@ -94,6 +103,7 @@ export default class BurgerMenu {
 		this.burgerButton.ariaExpanded = false;
 		this.burgerMenu.classList.remove(this.config.HEADER_MENU_OPEN);
 		this.body.classList.remove(this.config.PAGE_BODY_NO_SCROLL);
+		this.overlay.classList.remove('burger-overlay--visible');
 
 		if (this.main) {
 			this.main.style.pointerEvents = '';
@@ -101,6 +111,12 @@ export default class BurgerMenu {
 
 		if (wasOpen && this.headerFixedInstance) {
 			this.headerFixedInstance.updateFixedClass();
+		}
+	}
+
+	onOverlayClick() {
+		if (this.isBurgerMenuOpen()) {
+			this.hideBurgerMenu();
 		}
 	}
 
