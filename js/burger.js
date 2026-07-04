@@ -74,10 +74,6 @@ export default class BurgerMenu {
 		this.burgerMenu.classList.toggle(this.config.HEADER_MENU_OPEN, isOpen);
 		this.body.classList.toggle(this.config.PAGE_BODY_NO_SCROLL, isOpen);
 
-		if (this.main) {
-			this.main.classList.toggle('main--dimmed', isOpen);
-		}
-
 		if (this.headerFixedInstance) {
 			if (isOpen) {
 				this.headerFixedInstance.removeFixedClass();
@@ -94,10 +90,6 @@ export default class BurgerMenu {
 		this.burgerButton.ariaExpanded = false;
 		this.burgerMenu.classList.remove(this.config.HEADER_MENU_OPEN);
 		this.body.classList.remove(this.config.PAGE_BODY_NO_SCROLL);
-
-		if (this.main) {
-			this.main.classList.remove('main--dimmed');
-		}
 
 		if (wasOpen && this.headerFixedInstance) {
 			this.headerFixedInstance.updateFixedClass();

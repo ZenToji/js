@@ -286,15 +286,4 @@ input:focus {
   color: var(--secondary-color);
 }
 
-/* ================================
-   MAIN DIMMED (burger menu open)
-   ================================ */
-.main--dimmed::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: var(--layer-1);
-  pointer-events: none;
-  transition: opacity var(--transition-time);
-}
+
